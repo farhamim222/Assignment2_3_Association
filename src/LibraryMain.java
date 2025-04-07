@@ -1,5 +1,6 @@
 public class LibraryMain {
     public static void main(String[] args) {
+        // Books
         Book b1 = new Book("Introduction to Java Programming", "John Smith", 2020);
         Book b2 = new Book("Data Structures and Algorithms", "Jane Doe", 2018);
         Book b3 = new Book("The Art of Fiction", "Alice Johnson", 2019);
@@ -12,24 +13,33 @@ public class LibraryMain {
         b2.setRating(4.7);
         b2.addReview("Perfect for data structure understanding.");
 
+        // Library
         Library myLibrary = new Library();
         myLibrary.addBook(b1);
         myLibrary.addBook(b2);
         myLibrary.addBook(b3);
 
+        // Users
+        User user1 = new User("Farha", 26);
+        myLibrary.addUser(user1);
+
+        // Display
         myLibrary.displayBooks();
         myLibrary.findBooksByAuthor("Jane Doe");
 
-        myLibrary.borrowBook("Data Structures and Algorithms");
+        // Borrow/Return by User
+        myLibrary.borrowBook("Data Structures and Algorithms", user1);
+        user1.displayBorrowedBooks();
+
+        myLibrary.returnBook(b2, user1);
+        user1.displayBorrowedBooks();
+
         myLibrary.displayBooks();
 
-        myLibrary.returnBook(b2);
-        myLibrary.displayBooks();
-
+        // Availability
         System.out.println("Is 'The Art of Fiction' available? " + myLibrary.isBookAvailable("The Art of Fiction"));
-        System.out.println("Is 'Harry Potter' available? " + myLibrary.isBookAvailable("Harry Potter"));
 
-        // Show ratings and reviews
+        // Ratings and Reviews
         System.out.println("\nBook Ratings and Reviews:");
         System.out.println(b1.getTitle() + " - Rating: " + b1.getRating());
         for (String review : b1.getReviews()) {
@@ -41,7 +51,7 @@ public class LibraryMain {
             System.out.println("Review: " + review);
         }
 
-        // Task 5 – Library Statistics
+        // Statistics
         System.out.println("\nLibrary Statistics:");
         System.out.println("Average Rating: " + myLibrary.getAverageBookRating());
 

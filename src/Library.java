@@ -2,9 +2,14 @@ import java.util.ArrayList;
 
 public class Library {
     private ArrayList<Book> books = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
 
     public void addBook(Book book) {
         books.add(book);
+    }
+
+    public void addUser(User user) {
+        users.add(user);
     }
 
     public void displayBooks() {
@@ -24,11 +29,12 @@ public class Library {
         }
     }
 
-    public boolean borrowBook(String title) {
+    public boolean borrowBook(String title, User user) {
         for (Book b : books) {
             if (b.getTitle().equalsIgnoreCase(title)) {
                 books.remove(b);
-                System.out.println("Book \"" + title + "\" has been borrowed.");
+                user.borrowBook(b);
+                System.out.println(user.getName() + " borrowed \"" + title + "\".");
                 return true;
             }
         }
@@ -36,9 +42,10 @@ public class Library {
         return false;
     }
 
-    public void returnBook(Book book) {
+    public void returnBook(Book book, User user) {
         books.add(book);
-        System.out.println("Book \"" + book.getTitle() + "\" has been returned.");
+        user.returnBook(book);
+        System.out.println(user.getName() + " returned \"" + book.getTitle() + "\".");
     }
 
     public boolean isBookAvailable(String title) {
